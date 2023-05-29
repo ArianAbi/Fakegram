@@ -2,7 +2,6 @@ import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-next
 import { headers, cookies } from "next/headers"
 import Image from "next/image"
 import ProfilePost from "./ProfilePost"
-import { Suspense } from "react"
 
 export default async function userPage({ params: { username } }: any) {
 
@@ -11,11 +10,9 @@ export default async function userPage({ params: { username } }: any) {
         cookies,
     })
 
+
     const { data: [{ user_id }] }: any = await supabase.from('users').select('*').eq('user_name', username)
     const { data: posts } = await supabase.from('posts').select('*').eq('creator_id', user_id)
-
-
-    console.log(posts);
 
     return (
         <section>
@@ -41,7 +38,7 @@ export default async function userPage({ params: { username } }: any) {
 
             <div className="grid grid-cols-3 gap-1">
                 {posts?.map(post => <>
-                    {/* @ts-expect-error Server Component */}
+                    {/* @ts-expect-error Async Server Component */}
                     <ProfilePost
                         key={post.id}
                         id={post.id}
@@ -51,7 +48,8 @@ export default async function userPage({ params: { username } }: any) {
                         date={post.date}
                         image_path={post.image_path}
                     />
-                </>)}
+                </>
+                )}
             </div>
         </section>
     )
