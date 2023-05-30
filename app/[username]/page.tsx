@@ -38,7 +38,6 @@ export default async function userPage({ params: { username } }: any) {
 
             <div className="grid grid-cols-3 gap-1">
                 {posts?.map(post => <>
-                    {/* @ts-expect-error Async Server Component */}
                     <ProfilePost
                         key={post.id}
                         id={post.id}

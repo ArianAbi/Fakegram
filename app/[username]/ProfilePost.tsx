@@ -1,6 +1,8 @@
+'use client'
+
 import Image from "next/image"
-import { headers, cookies } from 'next/headers'
-import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs"
+import { useState, useEffect } from "react"
+import { useSupabase } from "../supabase-provider"
 
 type ProfilePost = {
     id: string,
@@ -11,25 +13,33 @@ type ProfilePost = {
     description: string
 }
 
-async function ProfilePost({ id, creator_id, date, title, image_path, description }: ProfilePost) {
+function ProfilePost({ id, creator_id, date, title, image_path, description }: ProfilePost) {
 
-    const supabase = createServerComponentSupabaseClient({
-        headers,
-        cookies,
-    })
+    const { supabase } = useSupabase()
+    const [publicUrl, setPublicUrl] = useState('');
+    const [loading, setLoading] = useState(true);
 
-    const { data: { publicUrl } } = await supabase.storage.from('posts').getPublicUrl(image_path)
+    useEffect(() => {
+        (async () => {
+            const { data } = await supabase.storage.from('posts').getPublicUrl(image_path)
+            setPublicUrl(data.publicUrl)
+            setLoading(false)
+        })()
+    }, [])
 
     return (
         <>
             <div className="relative aspect-square overflow-hidden">
-                <Image
-                    className="object-cover"
-                    src={publicUrl}
-                    alt={title}
-                    fill
-                    quality={25}
-                />
+                {loading && <div className="w-full h-full bg-slate-500"></div>}
+
+                {!loading &&
+                    <Image
+                        className="object-cover"
+                        src={publicUrl}
+                        alt={title}
+                        fill
+                        quality={25}
+                    />}
             </div>
         </>
     )
