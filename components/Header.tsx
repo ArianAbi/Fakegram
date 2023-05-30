@@ -43,7 +43,7 @@ export const Header = () => {
         <>
             <header className="flex text-black justify-between w-full bg-slate-200 text-center p-3 z-40">
                 <div className="text-xl font-bold text-left">
-                    <Link href="/" >
+                    <Link href="/">
                         Logo
                     </Link>
                 </div>
