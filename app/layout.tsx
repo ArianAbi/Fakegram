@@ -2,7 +2,7 @@ import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-next
 import { headers, cookies } from 'next/headers'
 import './globals.css'
 import SupabaseProvider from './supabase-provider'
-import { MobileNav } from '@/components/MobileNav'
+import MobileNav from '@/components/MobileNav'
 import { Header } from '@/components/Header'
 
 export const metadata = {

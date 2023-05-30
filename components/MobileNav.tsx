@@ -4,7 +4,7 @@ import { useSupabase } from "@/app/supabase-provider";
 import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { headers, cookies } from 'next/headers'
 
-export const MobileNav = async () => {
+const MobileNav = async () => {
 
     // const { supabase, session } = useSupabase()
     // const user = session?.user
@@ -87,3 +87,5 @@ export const MobileNav = async () => {
         </>
     )
 }
+
+export default MobileNav as any
