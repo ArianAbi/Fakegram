@@ -25,6 +25,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Header />
           {children}
           <MobileNav />
+
+          {/* adds padding to bottom for MobileNav */}
+          <div className='w-full h-[70px] bg-black'></div>
+
         </SupabaseProvider>
       </body>
     </html>
