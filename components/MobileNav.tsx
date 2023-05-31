@@ -6,35 +6,16 @@ import { headers, cookies } from 'next/headers'
 
 const MobileNav = async () => {
 
-    // const { supabase, session } = useSupabase()
-    // const user = session?.user
-
-    // const [username, setUsername] = useState("");
-
-    // useEffect(() => {
-    //     console.log(session?.user);
-
-    //     (async () => {
-
-    //         const { data } = await supabase.from('users').select('user_name').eq('user_id', user?.id)
-    //         const username = data![0].user_name;
-    //         console.log(username);
-    //         setUsername(username)
-    //     })()
-
-    // }, [supabase])
-
     const supabase = createServerComponentSupabaseClient({
         headers,
         cookies,
     })
     const user = (await supabase.auth.getUser()).data.user
     const { data: _username } = await supabase.from('users').select('user_name').eq('user_id', user?.id)
-    // const username = _username![0].user_name
 
     return (
         <>
-            <div className="fixed bottom-0 left-0 w-full text-center h-[70px] bg-black text-white font-semibold
+            <div className="fixed bottom-0 left-0 w-full text-center h-[70px] bg-black bg-opacity-80 backdrop-blur-lg text-white font-semibold
             grid grid-cols-3 divide-x-2 py-4 divide-white divide-opacity-50 z-10 
             border-t-[1px] border-white border-opacity-40">
 
