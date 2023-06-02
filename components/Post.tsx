@@ -2,7 +2,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { headers, cookies } from "next/headers"
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs"
-
+import LikeButton from "./LikeButton"
+import { revalidatePath } from "next/cache"
 
 interface Post {
     id: string,
@@ -20,8 +21,11 @@ const Post = async ({ id, creator_id, title, description, date, image_path }: Po
         cookies,
     })
 
+    const { data: { session } } = await supabase.auth.getSession();
+
     const { data: _imageUrl } = await supabase.storage.from('posts').getPublicUrl(image_path)
     const { data: _username } = await supabase.from('users').select('user_name').eq('user_id', creator_id)
+    const { data: _likes } = await supabase.from('likes').select('id').eq('post_id', id)
 
     const username = _username && _username[0].user_name
 
@@ -87,9 +91,7 @@ const Post = async ({ id, creator_id, title, description, date, image_path }: Po
                 <div className="flex gap-6">
                     {/* Like */}
                     <div className="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                        </svg>
+                        <LikeButton postId={id} userId={session?.user.id} likeCount={_likes ? _likes.length : 0} />
                     </div >
 
                     {/* Comment */}
@@ -102,21 +104,21 @@ const Post = async ({ id, creator_id, title, description, date, image_path }: Po
 
                 {/* likes counter */}
                 <span className="text-white">
-                    2048 likes
+                    {_likes?.length} Likes
                 </span>
 
             </div >
 
             {/* Description */}
             <div
-                className="w-full text-left text-[0.95rem] text-white mb-4 px-4 line-clamp-3 overflow-hidden"
+                className="w-full text-left text-[0.95rem] text-white mb-4 px-4 line-clamp-3"
             >
-                <div
-                    // href={`/post/${id}`}
+                <Link
+                    href={`/post/${id}`}
                     className="pr-2 font-semibold text-base inline"
                 >
                     {username}
-                </div>
+                </Link>
 
                 {description}
             </div>
