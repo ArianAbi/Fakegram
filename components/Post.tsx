@@ -91,7 +91,12 @@ const Post = async ({ id, creator_id, title, description, date, image_path }: Po
                 <div className="flex gap-6">
                     {/* Like */}
                     <div className="flex items-center gap-2">
-                        <LikeButton postId={id} userId={session?.user.id} likeCount={_likes ? _likes.length : 0} />
+                        <LikeButton
+                            postId={id}
+                            userId={session?.user.id}
+                            likeCount={_likes ? _likes.length : 0}
+                            isLiked={_likes && _likes.length > 0 ? true : false}
+                        />
                     </div >
 
                     {/* Comment */}
