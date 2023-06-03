@@ -91,7 +91,6 @@ const Post = async ({ id, creator_id, title, description, date, image_path }: Po
                     postId={id}
                     userId={session?.user.id}
                     likeCount={_likes ? _likes.length : 0}
-                    isLiked={_likes && _likes.length > 0 ? true : false}
                 />
 
             </div >
