@@ -3,6 +3,7 @@ import Link from "next/link"
 import { headers, cookies } from "next/headers"
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs"
 import PostInteractives from "./PostInteractives"
+import Description from "./Description"
 
 interface Post {
     id: string,
@@ -96,7 +97,12 @@ const Post = async ({ id, creator_id, title, description, date, image_path }: Po
             </div >
 
             {/* Description */}
-            <div
+            <Description
+                author_id={id}
+                author_username={username}
+                description={description}
+            />
+            {/* <div
                 className="w-full text-left text-[0.95rem] text-white mb-4 px-4 line-clamp-3"
             >
                 <Link
@@ -107,7 +113,7 @@ const Post = async ({ id, creator_id, title, description, date, image_path }: Po
                 </Link>
 
                 {description}
-            </div>
+            </div> */}
 
         </article >
     )
