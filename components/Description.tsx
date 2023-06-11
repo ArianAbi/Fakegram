@@ -18,11 +18,9 @@ const Description = ({ author_id, author_username, description }: Description) =
 
     useEffect(() => {
         // Assumption: Line height is 20px. Please adjust as per your CSS
-        if (hiddenSpanRef.current?.offsetHeight! > 60) {
-            console.log("BIG");
+        if (hiddenSpanRef.current?.offsetHeight! > 80) {
             setIsMoreThanThreeLines(true);
         } else {
-            console.log("SMALL");
             setIsMoreThanThreeLines(false);
         }
     }, [description]);
