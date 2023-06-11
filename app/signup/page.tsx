@@ -102,7 +102,7 @@ export default function Signup() {
 
     return (
         <>
-            <div className="relative text-black h-screen flex flex-col items-center justify-center px-10">
+            <div className="w-full h-full text-black flex flex-col items-center justify-center px-10 absolute">
 
                 <Link
                     href={'/'}
