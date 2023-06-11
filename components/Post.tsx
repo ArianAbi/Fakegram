@@ -8,13 +8,13 @@ import Description from "./Description"
 interface Post {
     id: string,
     creator_id: string,
-    title: string,
     description: string,
     date: string,
     image_path: string,
+    image_thumbnail: string,
 }
 
-const Post = async ({ id, creator_id, title, description, date, image_path }: Post) => {
+const Post = async ({ id, creator_id, description, date, image_path, image_thumbnail }: Post) => {
 
     const supabase = createServerComponentSupabaseClient({
         headers,
@@ -22,7 +22,6 @@ const Post = async ({ id, creator_id, title, description, date, image_path }: Po
     })
 
     const { data: { session } } = await supabase.auth.getSession();
-
     const { data: _imageUrl } = await supabase.storage.from('posts').getPublicUrl(image_path)
     const { data: _username } = await supabase.from('users').select('user_name').eq('user_id', creator_id)
     const { data: _likes } = await supabase.from('likes').select('id').eq('post_id', id)
@@ -38,9 +37,10 @@ const Post = async ({ id, creator_id, title, description, date, image_path }: Po
 
             {/* blury backgraound */}
             <Image
-                alt={title}
+                alt={description}
                 src={_imageUrl.publicUrl}
                 fill
+                loading="lazy"
                 style={{ objectFit: "cover", filter: "blur(30px)", transform: 'scale(1.4)', opacity: '15%', zIndex: '-1' }}
             />
 
@@ -76,12 +76,14 @@ const Post = async ({ id, creator_id, title, description, date, image_path }: Po
 
             <div className="bg-stone-500 w-full relative rounded-md overflow-hidden">
                 <Image
-                    alt={title}
+                    alt={description}
                     src={_imageUrl.publicUrl}
+                    placeholder="blur"
+                    blurDataURL={image_thumbnail}
                     width={1000}
                     height={1000}
                     priority
-                    style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
+                // style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
                 />
             </div>
 
@@ -102,19 +104,6 @@ const Post = async ({ id, creator_id, title, description, date, image_path }: Po
                 author_username={username}
                 description={description}
             />
-            {/* <div
-                className="w-full text-left text-[0.95rem] text-white mb-4 px-4 line-clamp-3"
-            >
-                <Link
-                    href={`/post/${id}`}
-                    className="pr-2 font-semibold text-base inline"
-                >
-                    {username}
-                </Link>
-
-                {description}
-            </div> */}
-
         </article >
     )
 }
