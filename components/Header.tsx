@@ -1,16 +1,17 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import Router, { useRouter } from "next/router"
 import Link from "next/link"
 import { useSupabase } from "@/app/supabase-provider"
+import { usePathname } from "next/navigation"
 
 export const Header = () => {
 
-    const loginRoute = "/login"
-    const signupRoute = "/signup"
+    const loginRoute = "login"
+    const signupRoute = "signup"
+    const createRoute = "create"
+    const pathname = usePathname().split('/')
 
-    // const router = useRouter();
     const { supabase, session } = useSupabase()
 
     const [loggingOut, setLoggingOut] = useState(false);
@@ -36,9 +37,13 @@ export const Header = () => {
         }
     }
 
-    // if (router.pathname === loginRoute || router.pathname === signupRoute) {
-    //     return <></>
-    // }
+    if (
+        pathname[pathname.length - 1] === loginRoute ||
+        pathname[pathname.length - 1] === signupRoute ||
+        pathname[pathname.length - 1] === createRoute
+    ) {
+        return <></>
+    }
     return (
         <>
             <header className="flex text-black justify-between w-full bg-slate-200 text-center p-3 z-40">
