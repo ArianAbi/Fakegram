@@ -1,7 +1,6 @@
 import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { headers, cookies } from 'next/headers'
 import Post from '@/components/Post'
-
 // do not cache this page
 export const revalidate = 0
 
@@ -21,10 +20,10 @@ export default async function ServerComponent() {
               key={i}
               id={post.id}
               creator_id={post.creator_id}
-              title={post.title}
               date={post.date}
               description={post.description}
               image_path={post.image_path}
+              image_thumbnail={post.image_thumbnail}
             />
           </>
         )
