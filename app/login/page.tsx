@@ -39,7 +39,7 @@ export default function Login() {
 
     return (
         <>
-            <div className="h-screen text-black flex flex-col items-center justify-center px-10 relative">
+            <div className="h-full w-full text-black flex flex-col items-center justify-center px-10 absolute">
 
                 <Link
                     href={'/'}
