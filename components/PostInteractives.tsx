@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { experimental_useOptimistic as useOptimistic } from "react";
 import { Dislike, Like } from "@/actions";
 import { useSupabase } from "@/app/supabase-provider";
+import { useToaster } from "@/components/hooks/useToaster";
 
 interface LikeButton {
     postId: string,
@@ -16,6 +17,7 @@ function PostInteractives({ postId, userId, likeCount }: LikeButton) {
     const { supabase, session } = useSupabase();
     const [_isLiked, setIsLiked] = useState(false);
     const [loading, setLoading] = useState(true);
+    const { awakeToaster } = useToaster()
 
     useEffect(() => {
         (async () => {
@@ -49,7 +51,7 @@ function PostInteractives({ postId, userId, likeCount }: LikeButton) {
                     onClick={async () => {
 
                         if (!session?.user) {
-                            console.log("Please Loggin from <PostInteractives />");
+                            awakeToaster()
                             return
                         }
 
@@ -73,6 +75,7 @@ function PostInteractives({ postId, userId, likeCount }: LikeButton) {
                 </button>
 
                 <p>{optLike.likeCount} Likes</p>
+
             </div>
         </>
     )

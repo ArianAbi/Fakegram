@@ -4,6 +4,7 @@ import './globals.css'
 import SupabaseProvider from './supabase-provider'
 import MobileNav from '@/components/MobileNav'
 import { Header } from '@/components/Header'
+import { Toaster, ToasterProvider } from '@/components/hooks/useToaster'
 
 export const metadata = {
   title: 'Fakegram',
@@ -22,13 +23,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body>
         <SupabaseProvider session={session}>
-          <Header />
-          {children}
-          <MobileNav />
+          <ToasterProvider>
+            <Header />
+            {children}
+            <MobileNav />
 
-          {/* adds padding to bottom for MobileNav */}
-          <div className='w-full h-[70px] bg-black'></div>
+            {/* adds padding to bottom for MobileNav */}
+            <div className='w-full h-[70px] bg-black'></div>
 
+            <Toaster />
+          </ToasterProvider>
         </SupabaseProvider>
       </body>
     </html>

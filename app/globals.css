@@ -93,6 +93,7 @@ body {
   min-height: 100vh;
   background: black;
   color: white;
+  overflow-x: hidden;
 }
 
 .shadow-inset {
@@ -106,4 +107,25 @@ body {
   height: 200%;
   box-shadow: inset 0px 0px 50px 50px black;
   z-index: -1;
+}
+
+.toaster {
+  position: absolute;
+  min-width: 200px;
+  background-color: rgb(239 68 68);
+  border-radius: 1rem;
+  padding-left: 1rem;
+  padding-right: 1.5rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  bottom: 5rem;
+  right: 1rem;
+  transform: scale(0.5);
+  opacity: 0;
+  transition: all 0.1s ease-out;
+}
+
+.toaster.show {
+  transform: scale(1);
+  opacity: 1;
 }

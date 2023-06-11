@@ -3,7 +3,7 @@
 import { useSupabase } from "@/app/supabase-provider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { imgToBase64, compressImg } from "@/hooks/useOptimizeImage";
+import { imgToBase64, compressImg } from "@/components/hooks/useOptimizeImage";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
@@ -85,7 +85,7 @@ function CreatePost({ params: { username } }: any) {
 
     return (
         <>
-            <div className="h-full w-full flex flex-col justify-center absolute">
+            <div className="h-full w-full flex flex-col justify-center absolute px-12">
 
                 <Link
                     href={'/'}
