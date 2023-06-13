@@ -17,6 +17,7 @@ function PostInteractives({ postId, userId, likeCount }: LikeButton) {
     const { supabase, session } = useSupabase();
     const [_isLiked, setIsLiked] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [toggled, setToggled] = useState(false);
     const { awakeToaster } = useToaster()
 
     useEffect(() => {
@@ -47,6 +48,8 @@ function PostInteractives({ postId, userId, likeCount }: LikeButton) {
         <>
             <div className="w-full text-left">
                 <button
+                    className={`${toggled ? 'pop-animation' : ''}`}
+                    // className="pop-animation"
                     disabled={loading}
                     onClick={async () => {
 
@@ -56,11 +59,13 @@ function PostInteractives({ postId, userId, likeCount }: LikeButton) {
                         }
 
                         if (_isLiked) {
+                            setToggled(false)
                             setIsLiked(false)
                             addOptLike(optLike.likeCount - 1)
                             const { error } = await Dislike(userId, postId)
                             if (error) setIsLiked(true)
                         } else {
+                            setToggled(true)
                             setIsLiked(true)
                             addOptLike(optLike.likeCount + 1)
                             const { error } = await Like(userId, postId)
