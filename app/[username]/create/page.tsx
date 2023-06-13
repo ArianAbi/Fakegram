@@ -10,6 +10,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { uuid } from "uuidv4";
 import { v4 } from 'uuid'
 import { Link } from "lucide-react";
+import { revalidatePath } from "next/cache";
 
 function CreatePost({ params: { username } }: any) {
 
@@ -80,6 +81,7 @@ function CreatePost({ params: { username } }: any) {
             return;
         }
 
+        revalidatePath('/')
         router.replace('/')
     }
 
