@@ -46,7 +46,10 @@ export const Header = () => {
     }
     return (
         <>
-            <header className="flex text-black justify-between w-full bg-slate-200 text-center p-3 z-40">
+            {/* adds the header space back to DOM */}
+            <div className="w-full h-[55px]"></div>
+
+            <header className="fixed top-0 flex items-center w-full h-[55px] text-white bg-transparent backdrop-blur-xl border-b-[1px] justify-between bg-slate-200 text-center p-3 z-40">
                 <div className="text-xl font-bold text-left">
                     <Link href="/">
                         Logo
@@ -54,7 +57,7 @@ export const Header = () => {
                 </div>
 
                 {!session?.user &&
-                    <div className="text-right">
+                    <div className="text-right pl-4 border-l-[1px] border-stone-600">
                         <a href={loginRoute}>Login</a>
                     </div>
                 }
