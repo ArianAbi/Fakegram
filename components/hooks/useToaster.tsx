@@ -1,5 +1,6 @@
 'use client'
 
+import Link from "next/link";
 import { Dispatch, SetStateAction, createContext, useContext, useState } from "react"
 
 interface hiddenCTX {
@@ -15,8 +16,14 @@ export function Toaster() {
 
     return (
         <>
-            <div className={`toaster ${hiddenCtx?.hidden ? '' : 'show'}`}>
-                you have to loggin to use this feature
+            <div className={`toaster ${hiddenCtx?.hidden ? '' : 'show'} text-[0.9rem]`}>
+                quickly loggin with
+                <span className="text-cyan-500 italic underline mx-1 text-base">
+                    <Link href='/login'>
+                        Magic Link
+                    </Link>
+                </span>
+                to use this feature
             </div>
         </>
     )
@@ -36,6 +43,7 @@ export function ToasterProvider({ children }: { children: React.ReactNode }) {
 export function useToaster() {
 
     const hiddenCtx = useContext(hiddenContext)
+    const duration = 5000
 
     function awakeToaster() {
 
@@ -45,7 +53,7 @@ export function useToaster() {
 
             setTimeout(() => {
                 hiddenCtx.setHidden(true)
-            }, 2500);
+            }, duration);
 
         }
 
