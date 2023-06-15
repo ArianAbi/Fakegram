@@ -1,17 +1,18 @@
 import Image from "next/image"
 import { headers, cookies } from 'next/headers'
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs"
+import Link from "next/link"
 
 type ProfilePost = {
     id: string,
-    creator_id: string,
+    username: string,
     date: string,
-    title: string,
     image_path: string,
+    image_thumbnail: string,
     description: string
 }
 
-async function ProfilePost({ id, creator_id, date, title, image_path, description }: ProfilePost) {
+async function ProfilePost({ id, username, date, image_path, description, image_thumbnail }: ProfilePost) {
 
     const supabase = createServerComponentSupabaseClient({
         headers,
@@ -22,15 +23,19 @@ async function ProfilePost({ id, creator_id, date, title, image_path, descriptio
 
     return (
         <>
-            <div className="relative aspect-square overflow-hidden">
-                <Image
-                    className="object-cover"
-                    src={publicUrl}
-                    alt={title}
-                    fill
-                    quality={25}
-                />
-            </div>
+            <Link href={`/${username}/${id}`}>
+                <div className="relative aspect-square overflow-hidden">
+                    <Image
+                        className="object-cover"
+                        placeholder="blur"
+                        blurDataURL={image_thumbnail}
+                        src={publicUrl}
+                        alt={description}
+                        fill
+                        quality={25}
+                    />
+                </div>
+            </Link>
         </>
     )
 }

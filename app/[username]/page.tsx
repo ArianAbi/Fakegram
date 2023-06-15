@@ -41,11 +41,11 @@ export default async function userPage({ params: { username } }: any) {
                     <ProfilePost
                         key={post.id}
                         id={post.id}
-                        creator_id={post.creator_id}
-                        title={post.title}
+                        username={username}
                         description={post.description}
                         date={post.date}
                         image_path={post.image_path}
+                        image_thumbnail={post.image_thumbnail}
                     />
                 </>
                 )}
