@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*:focus-visible{
+  outline: 1px solid rgba(255, 255, 255, 0.4);
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -96,6 +100,7 @@ body {
   background: black;
   color: white;
   overflow-x: hidden;
+  z-index: -2;
 }
 
 .shadow-inset {
