@@ -23,6 +23,26 @@ export const Header = () => {
         setDialogOpen(!dialogOpen)
     }
 
+    const [isHeaderVisible, setHeaderVisible] = useState(true);
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+    useEffect(() => {
+
+        const handleScroll = () => {
+            const currentScrollPos: number = window.scrollY;
+
+            //threshold is the height of the header
+            const threshold = 55;
+
+            const visible: boolean = prevScrollPos > currentScrollPos || currentScrollPos < threshold;
+
+            setPrevScrollPos(currentScrollPos);
+            setHeaderVisible(visible);
+        };
+        window.addEventListener('scroll', handleScroll);
+
+    }, [prevScrollPos]);
+
     const logout = async () => {
         try {
             setLoggingOut(true)
@@ -51,7 +71,7 @@ export const Header = () => {
             {/* adds the header space back to DOM */}
             <div className={`w-full h-[55px]`}></div>
 
-            <header className={`fixed flex items-center w-full h-[55px] text-white bg-black bg-opacity-80 backdrop-blur-xl border-b-[1px] justify-between text-center p-3 z-40`} >
+            <header className={`fixed flex items-center w-full h-[55px] text-white bg-black bg-opacity-80 backdrop-blur-xl border-b-[1px] justify-between text-center p-3 z-40 transition-all duration-150 ${isHeaderVisible ? 'top-0' : '-top-16'}`} >
                 <div className="text-xl font-bold text-left">
                     <Link href="/">
                         Logo
