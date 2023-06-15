@@ -49,7 +49,7 @@ export const Header = () => {
             {/* adds the header space back to DOM */}
             <div className="w-full h-[55px]"></div>
 
-            <header className="fixed top-0 flex items-center w-full h-[55px] text-white bg-transparent backdrop-blur-xl border-b-[1px] justify-between bg-slate-200 text-center p-3 z-40">
+            <header className="fixed top-0 flex items-center w-full h-[55px] text-white bg-black bg-opacity-80 backdrop-blur-xl border-b-[1px] justify-between text-center p-3 z-40">
                 <div className="text-xl font-bold text-left">
                     <Link href="/">
                         Logo
