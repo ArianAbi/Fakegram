@@ -75,9 +75,11 @@
     @apply border-border;
   }
 
-  body {
+  html, body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -110,10 +112,9 @@ body {
 }
 
 .toaster {
-  position: absolute;
+  position: fixed;
   min-width: 200px;
-  /* background-color: rgb(239 68 68); */
-  background: transparent;
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 1rem;
@@ -122,14 +123,14 @@ body {
   padding-top: .5rem;
   padding-bottom: .5rem;
   bottom: 5rem;
-  right: 1rem;
-  transform: scale(0.5);
+  right: 1;
+  transform: scale(0.5) translateX(170%);
   opacity: 0;
   transition: all 0.1s ease-out;
 }
 
 .toaster.show {
-  transform: scale(1);
+  transform: scale(1) translateX(60%);
   opacity: 1;
 }
 

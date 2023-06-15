@@ -17,10 +17,10 @@ export function Toaster() {
     return (
         <>
             <div className={`toaster ${hiddenCtx?.hidden ? '' : 'show'} text-[0.9rem]`}>
-                quickly loggin with
+                quickly
                 <span className="text-cyan-500 italic underline mx-1 text-base">
                     <Link href='/login'>
-                        Magic Link
+                        Login
                     </Link>
                 </span>
                 to use this feature
