@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { useSupabase } from "@/app/supabase-provider";
 import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { headers, cookies } from 'next/headers'
 
@@ -54,7 +52,7 @@ const MobileNav = async () => {
                     <Link
                         href={
                             user === null || undefined ? '/login'
-                                : `/${_username && _username[0].user_name}/dashboard`
+                                : `/${_username && _username[0].user_name}`
                         }
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
