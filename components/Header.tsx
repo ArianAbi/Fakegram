@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useSupabase } from "@/app/supabase-provider"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
+import { revalidatePath } from "next/cache"
 
 export const Header = () => {
 
@@ -11,12 +12,12 @@ export const Header = () => {
     const signupRoute = "signup"
     const createRoute = "create"
     const pathname = usePathname().split('/')
+    const router = useRouter()
 
     const { supabase, session } = useSupabase()
 
     const [loggingOut, setLoggingOut] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(false);
-
 
     const toggleDialog = () => {
         setDialogOpen(!dialogOpen)
@@ -29,7 +30,8 @@ export const Header = () => {
             console.log("logged out");
             setLoggingOut(false)
             setDialogOpen(false)
-            // router.replace('/');
+            revalidatePath('/')
+            router.replace('/');
         } catch (err) {
             console.log(err);
             setLoggingOut(false)
@@ -47,9 +49,9 @@ export const Header = () => {
     return (
         <>
             {/* adds the header space back to DOM */}
-            <div className="w-full h-[55px]"></div>
+            <div className={`w-full h-[55px]`}></div>
 
-            <header className="fixed top-0 flex items-center w-full h-[55px] text-white bg-black bg-opacity-80 backdrop-blur-xl border-b-[1px] justify-between text-center p-3 z-40">
+            <header className={`fixed flex items-center w-full h-[55px] text-white bg-black bg-opacity-80 backdrop-blur-xl border-b-[1px] justify-between text-center p-3 z-40`} >
                 <div className="text-xl font-bold text-left">
                     <Link href="/">
                         Logo
