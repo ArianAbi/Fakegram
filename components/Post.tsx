@@ -41,7 +41,7 @@ const Post = async ({ id, creator_id, description, date, image_path, image_thumb
                 src={_imageUrl.publicUrl}
                 fill
                 loading="lazy"
-                style={{ objectFit: "cover", filter: "blur(30px)", transform: 'scale(1.4)', opacity: '15%', zIndex: '-1' }}
+                style={{ objectFit: "cover", filter: "blur(30px)", transform: 'scale(1.4)', opacity: '20%', zIndex: '-1' }}
             />
 
             {/* Profile */}
