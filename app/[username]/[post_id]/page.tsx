@@ -1,5 +1,6 @@
 import Description from "@/components/Description";
 import PostInteractives from "@/components/PostInteractives";
+import PostOptions from "@/components/PostOptions";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs"
 import { headers, cookies } from "next/headers"
 import Image from "next/image";
@@ -47,32 +48,26 @@ export default async function Post({ params: { post_id } }: any) {
                 />
 
                 {/* Profile */}
-                <Link
-                    className="w-full"
-                    href={`/${username}`}
+                <div
+                    className="w-full p-4 flex justify-between items-center bg-black"
                 >
-                    <div className="text-lg font-bold text-left py-4 px-4 text-white z-10">
-                        <div
-                            className="flex gap-3 items-center"
-                        >
-                            {/* Profile Logo */}
-                            <div className="bg-white w-10 aspect-square rounded-full relative overflow-hidden">
-                                {/* Body */}
-                                <div
-                                    className="bg-gray-700 w-8 aspect-square rounded-full absolute
-                            left-[50%] top-[50%] translate-x-[-50%] translate-y-[-0%]"
-                                ></div>
+                    <Link
+                        href={`/${username}`}
+                        className="flex gap-2 items-center text-xl font-semibold"
+                    >
+                        <Image
+                            className="rounded-full"
+                            alt="profile"
+                            src={'/defaultProfile.png'}
+                            height={40}
+                            width={40}
+                        />
 
-                                {/* Head */}
-                                <div
-                                    className="bg-gray-700 w-5 aspect-square rounded-full absolute
-                            left-[50%] top-[50%] translate-x-[-50%] translate-y-[-70%]"
-                                ></div>
-                            </div>
-                            {username}
-                        </div>
-                    </div>
-                </Link>
+                        <h2>{username}</h2>
+                    </Link>
+
+                    <PostOptions />
+                </div>
 
                 <div className="bg-stone-500 w-full relative rounded-md overflow-hidden">
                     <Image
