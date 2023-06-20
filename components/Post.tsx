@@ -4,6 +4,7 @@ import { headers, cookies } from "next/headers"
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs"
 import PostInteractives from "./PostInteractives"
 import Description from "./Description"
+import PostOptions from "./PostOptions"
 
 interface Post {
     id: string,
@@ -62,6 +63,8 @@ const Post = async ({ id, creator_id, description, date, image_path, image_thumb
 
                     <h2>{username}</h2>
                 </Link>
+
+                <PostOptions />
             </div>
 
             <div className="bg-stone-500 w-full relative rounded-md overflow-hidden">
