@@ -16,11 +16,11 @@ const Description = ({ author_id, author_username, description }: Description) =
         <div className="w-full mb-4 px-4">
             <ReactShowMoreText
                 expanded={false}
-                className="w-full text-left"
+                className="w-full text-left text-[0.87rem]"
             >
                 <Link
                     href={`/${author_username}`}
-                    className="pr-2 font-semibold text-base inline"
+                    className="pr-2 font-semibold text-[0.92rem] inline"
                 >
                     {author_username}
                 </Link>
