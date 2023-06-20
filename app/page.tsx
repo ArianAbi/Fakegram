@@ -9,7 +9,8 @@ export default async function ServerComponent() {
     headers,
     cookies,
   })
-  const { data } = await supabase.from('posts').select('*')
+
+  const { data } = await supabase.from('posts').select('*').order('date', { ascending: false })
 
   return (
     <div className="max-w-[468px] mx-auto grid grid-cols-1 text-center divide-y-[1px] divide-white divide-opacity-40">
