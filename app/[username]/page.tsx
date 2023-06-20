@@ -20,7 +20,7 @@ export default async function userPage({ params: { username } }: any) {
             <div className="flex gap-4 p-4 text-xl">
                 <Image
                     className="rounded-full"
-                    src={'/blank_profile.png'}
+                    src={'/defaultProfile.png'}
                     width={70}
                     height={70}
                     priority
