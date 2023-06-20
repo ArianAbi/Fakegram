@@ -44,7 +44,7 @@ export default async function Post({ params: { post_id } }: any) {
                     src={_imageUrl.publicUrl}
                     fill
                     loading="lazy"
-                    style={{ objectFit: "cover", filter: "blur(30px)", transform: 'scale(1.4)', opacity: '15%', zIndex: '0' }}
+                    style={{ objectFit: "cover", filter: "blur(30px)", transform: 'scale(1.4)', opacity: '15%', zIndex: '-1' }}
                 />
 
                 {/* Profile */}
