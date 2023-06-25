@@ -7,7 +7,7 @@ import { imgToBase64, compressImg } from "@/components/hooks/useOptimizeImage";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
-import { uuid } from "uuidv4";
+import { motion } from 'framer-motion'
 import { v4 } from 'uuid'
 import { Link } from "lucide-react";
 import { revalidatePath } from "next/cache";
@@ -180,14 +180,15 @@ function CreatePost({ params: { username } }: any) {
 
                     {/* create */}
                     <div className="w-full text-center">
-                        <Button
+                        <motion.button
                             className={`py-2 bg-emerald-600 text-white text-xl font-semibold rounded-md px-16
                          ${loading ? "animate-pulse" : ""}`}
+                            whileTap={{ scale: 0.9 }}
                             disabled={loading}
                             type="submit"
                         >
                             {loading ? "uploading..." : "Create"}
-                        </Button>
+                        </motion.button>
 
                         {error && <span className="text-sm italic text-red-600">{error}</span>}
                     </div>
