@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { imgToBase64, compressImg } from "@/components/hooks/useOptimizeImage";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import { uuid } from "uuidv4";
 import { v4 } from 'uuid'
@@ -13,8 +13,6 @@ import { Link } from "lucide-react";
 import { revalidatePath } from "next/cache";
 
 function CreatePost({ params: { username } }: any) {
-
-    const router = useRouter()
 
     const { supabase, session } = useSupabase();
 
@@ -79,8 +77,8 @@ function CreatePost({ params: { username } }: any) {
             return;
         }
 
-        revalidatePath('/')
-        router.replace('/')
+        revalidatePath('/');
+        redirect('/');
     }
 
     return (
