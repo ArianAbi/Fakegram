@@ -50,8 +50,6 @@ function CreatePost({ params: { username } }: any) {
             return;
         }
 
-        console.log('im here');
-
         // upload image
         const { data: imageData, error: imageError } = await supabase.storage
             .from('posts')
@@ -65,19 +63,19 @@ function CreatePost({ params: { username } }: any) {
         }
 
         // insert post
-        try {
-            await supabase.from('posts').insert(
-                {
-                    creator_id: session?.user.id,
-                    image_path: imageData.path,
-                    image_thumbnail: Base64Img,
-                    description: description
-                }
-            )
-        } catch (err) {
-            console.log(err);
-            setError(`${err}`);
-            setLoading(false)
+
+        const { data: postData, error: postError } = await supabase.from('posts').insert(
+            {
+                creator_id: session?.user.id,
+                image_path: imageData.path,
+                image_thumbnail: Base64Img,
+                description: description
+            }
+        )
+
+        if (postError) {
+            setLoading(false);
+            setError('something went wrong try again');
             return;
         }
 
