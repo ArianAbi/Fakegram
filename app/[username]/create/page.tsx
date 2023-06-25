@@ -131,6 +131,7 @@ function CreatePost({ params: { username } }: any) {
                                 type="file"
                                 accept=".png , .jpg"
                                 id="dropzone-file"
+                                disabled={loading}
                                 onChange={async (e) => {
                                     if (e.target.files) {
                                         //compress the file and set the file
@@ -177,6 +178,7 @@ function CreatePost({ params: { username } }: any) {
                         className="block p-2.5 w-full text-sm text-stone-200 bg-transparent rounded-lg border border-gray-500 focus:ring-blue-500 focus:border-blue-500 "
                         placeholder="Description..."
                         value={description}
+                        disabled={loading}
                         onChange={(e) => setDescription(e.target.value)}
                     />
 
