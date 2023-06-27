@@ -1,20 +1,19 @@
 'use client'
 
 import { useSupabase } from "@/app/supabase-provider";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { imgToBase64, compressImg } from "@/components/hooks/useOptimizeImage";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import { motion } from 'framer-motion'
 import { v4 } from 'uuid'
 import { Link } from "lucide-react";
-import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 
 function CreatePost({ params: { username } }: any) {
 
     const { supabase, session } = useSupabase();
+    const router = useRouter()
 
     const [description, setDescription] = useState<string>();
     const [file, setFile] = useState<File>();
@@ -90,9 +89,7 @@ function CreatePost({ params: { username } }: any) {
         }
 
         setLoadingMessage('redirecting')
-
-        revalidatePath('/');
-        redirect('/');
+        router.replace('/')
     }
 
     return (
