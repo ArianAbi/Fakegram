@@ -4,11 +4,7 @@ import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { useSupabase } from "@/app/supabase-provider"
 
-interface PostOptions {
-    creator_id: string
-}
-
-export default function PostOptions({ creator_id }: PostOptions) {
+export default function PostOptions() {
 
     const [open, setOpen] = useState(false)
     const [deletable, setDeletable] = useState(false);
