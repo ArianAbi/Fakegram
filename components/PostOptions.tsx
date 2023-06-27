@@ -24,22 +24,6 @@ export default function PostOptions({ creator_id }: PostOptions) {
 
     const deletePost = async () => {
         console.log('deleting...');
-
-        // const { error: deleteLikesErr } = await supabase.from('likes').delete().eq('user_id', creator_id)
-
-        // if (deleteLikesErr) {
-        //     console.log('Failed , likes');
-        //     return;
-        // }
-
-        const { error: deletePostErr } = await supabase.from('posts').delete().eq('creator_id', creator_id)
-
-        if (deletePostErr) {
-            console.log(deletePostErr);
-            return;
-        }
-
-        console.log("DELETED !");
     }
 
     return (
