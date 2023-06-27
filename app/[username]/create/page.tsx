@@ -18,17 +18,19 @@ function CreatePost({ params: { username } }: any) {
 
     const [description, setDescription] = useState<string>();
     const [file, setFile] = useState<File>();
+    const [compressFile, setCompressFile] = useState<File>();
     const [fileSrc, setFileSrc] = useState<string>()
     const [Base64Img, setBase64Img] = useState<string | ArrayBuffer>()
-
+    const [loadingMessage, setLoadingMessage] = useState('');
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("");
 
-    //turn image file to base64
     useEffect(() => {
-        file && imgToBase64(file, (base64) => {
-            setBase64Img(base64)
-        })
+        //turn image file to base64
+        file && imgToBase64(file, (base64) => setBase64Img(base64))
+
+        //compress file
+        file && compressImg(file, 800, (compressedImg) => setCompressFile(compressedImg))
 
     }, [file])
 
@@ -37,45 +39,57 @@ function CreatePost({ params: { username } }: any) {
         setError("")
         setLoading(true)
 
+        console.log('resizing...');
+        setLoadingMessage('resizing...');
+
         if (
             description === "" ||
-            file === undefined ||
+            compressFile === undefined ||
             Base64Img === undefined ||
-            session?.user === null
+            session === null
         ) {
             setError("please fill all the fields");
+            setLoadingMessage('')
             setLoading(false)
             return;
         }
 
-        // upload image
-        const { data: imageData, error: imageError } = await supabase.storage
-            .from('posts')
-            .upload(session?.user.id + '/' + v4(), file)
+        try {
+            setLoadingMessage('uploading...')
 
-        if (imageError) {
-            console.log(imageError);
-            setError(imageError.message)
-            setLoading(false)
-            return
-        }
+            // upload image
+            const { data: imageData, error: imageErr } = await supabase.storage
+                .from('posts')
+                .upload(session.user.id + '/' + v4(), compressFile)
 
-        // insert post
-
-        const { data: postData, error: postError } = await supabase.from('posts').insert(
-            {
-                creator_id: session?.user.id,
-                image_path: imageData.path,
-                image_thumbnail: Base64Img,
-                description: description
+            if (imageErr) {
+                setLoading(false)
+                setLoadingMessage('')
+                throw new Error(imageErr.message);
             }
-        )
 
-        if (postError) {
-            setLoading(false);
-            setError('something went wrong try again');
+            //insert post
+
+            setLoadingMessage('creating...')
+
+            await supabase.from('posts').insert(
+                {
+                    creator_id: session?.user.id,
+                    image_path: imageData.path,
+                    image_thumbnail: Base64Img,
+                    description: description
+                }
+            )
+
+        } catch (err) {
+            console.log(err);
+            setError(`${err}`)
+            setLoading(false)
+            setLoadingMessage('');
             return;
         }
+
+        setLoadingMessage('redirecting')
 
         revalidatePath('/');
         redirect('/');
@@ -181,13 +195,13 @@ function CreatePost({ params: { username } }: any) {
                     {/* create */}
                     <div className="w-full text-center">
                         <motion.button
-                            className={`py-2 bg-emerald-600 text-white text-xl font-semibold rounded-md px-16
+                            className={`w-full py-2 bg-emerald-600 text-white text-xl font-semibold rounded-md px-16
                          ${loading ? "animate-pulse" : ""}`}
                             whileTap={{ scale: 0.9 }}
                             disabled={loading}
                             type="submit"
                         >
-                            {loading ? "uploading..." : "Create"}
+                            {loading ? loadingMessage : "Create"}
                         </motion.button>
 
                         {error && <span className="text-sm italic text-red-600">{error}</span>}
