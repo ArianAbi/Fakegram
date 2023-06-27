@@ -64,7 +64,9 @@ const Post = async ({ id, creator_id, description, date, image_path, image_thumb
                     <h2>{username}</h2>
                 </Link>
 
-                <PostOptions />
+                <PostOptions
+                    creator_id={creator_id}
+                />
             </div>
 
             <div className="bg-stone-500 w-full relative rounded-md overflow-hidden">
