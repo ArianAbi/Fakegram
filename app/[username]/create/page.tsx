@@ -90,8 +90,8 @@ function CreatePost({ params: { username } }: any) {
         }
 
         setLoadingMessage('redirecting')
-        revalidatePath('/')
         router.replace('/')
+        router.refresh()
     }
 
     return (
