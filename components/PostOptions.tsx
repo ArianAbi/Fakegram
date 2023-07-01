@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { useSupabase } from "@/app/supabase-provider"
 import { useRouter } from "next/navigation"
 
-export default function PostOptions({ post_id }: { post_id: string }) {
+export default function PostOptions({ post_id }: any) {
 
     const [open, setOpen] = useState(false)
     const [deletable, setDeletable] = useState(false);
