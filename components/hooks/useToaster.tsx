@@ -31,16 +31,13 @@ export function Toaster() {
                     {...swipeHandlers}
                     className={`toaster ${hiddenCtx?.hidden ? '' : 'show'} text-[0.9rem]`}
                 >
-                    {content.content}
+                    {hiddenCtx && !hiddenCtx.hidden ? content.content : <></>}
                 </div>
             </>
         )
     } else {
         return (
             <>
-                <div className={`toaster ${hiddenCtx?.hidden ? '' : 'show'} text-[0.9rem]`}>
-                    something went wrong!
-                </div>
             </>
         )
     }
