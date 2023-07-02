@@ -60,7 +60,7 @@ export default function Login() {
                         <Image
                             className="absolute left-2 top-[50%] translate-y-[-50%]"
                             priority
-                            src="/google.svg"
+                            src="/google.png"
                             height={28}
                             width={28}
                             alt="login with google"
