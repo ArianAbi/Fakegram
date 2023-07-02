@@ -13,3 +13,11 @@ export function LoginToast() {
         </>
     )
 }
+
+export function DeleteToast() {
+    return (
+        <>
+            you'r post has been deleted!
+        </>
+    )
+}
