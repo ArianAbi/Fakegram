@@ -10,11 +10,14 @@ import { v4 } from 'uuid'
 import { Link } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { useToaster } from "@/components/hooks/useToaster";
+import { CreatedToast } from "@/components/ToastComponents";
 
 function CreatePost({ params: { username } }: any) {
 
     const { supabase, session } = useSupabase();
     const router = useRouter()
+    const { awakeToaster } = useToaster();
 
     const [description, setDescription] = useState<string>();
     const [file, setFile] = useState<File>();
@@ -89,7 +92,8 @@ function CreatePost({ params: { username } }: any) {
             return;
         }
 
-        setLoadingMessage('redirecting')
+        setLoadingMessage('redirecting...')
+        awakeToaster(<CreatedToast />)
         router.replace('/')
         router.refresh()
     }
