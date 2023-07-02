@@ -6,6 +6,7 @@ import { Dislike, Like } from "@/actions";
 import { useSupabase } from "@/app/supabase-provider";
 import { useToaster } from "@/components/hooks/useToaster";
 import { motion } from 'framer-motion'
+import { LoginToast } from "./ToastComponents";
 
 interface LikeButton {
     postId: string,
@@ -54,7 +55,7 @@ function PostInteractives({ postId, userId, likeCount }: LikeButton) {
                     onClick={async () => {
 
                         if (!session?.user) {
-                            awakeToaster()
+                            awakeToaster(<LoginToast />)
                             return
                         }
 
