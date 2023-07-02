@@ -1,6 +1,5 @@
 'use client'
-
-import Link from "next/link";
+import { useSwipeable } from 'react-swipeable';
 import React, { createContext, useContext, useState } from "react"
 
 interface hiddenCTX {
@@ -21,10 +20,17 @@ export function Toaster() {
     const hiddenCtx = useContext(hiddenContext)
     const content = useContext(jsxContext)
 
+    const swipeHandlers = useSwipeable({
+        onSwipedRight: () => hiddenCtx?.setHidden(true)
+    })
+
     if (content && content.content) {
         return (
             <>
-                <div className={`toaster ${hiddenCtx?.hidden ? '' : 'show'} text-[0.9rem]`}>
+                <div
+                    {...swipeHandlers}
+                    className={`toaster ${hiddenCtx?.hidden ? '' : 'show'} text-[0.9rem]`}
+                >
                     {content.content}
                 </div>
             </>
