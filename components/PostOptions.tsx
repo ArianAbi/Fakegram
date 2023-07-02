@@ -4,12 +4,15 @@ import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { useSupabase } from "@/app/supabase-provider"
 import { useRouter } from "next/navigation"
+import { useToaster } from "./hooks/useToaster"
+import { DeleteToast } from "./ToastComponents"
 
 export default function PostOptions({ post_id }: any) {
 
     const [open, setOpen] = useState(false)
     const [deletable, setDeletable] = useState(false);
     const [deleteLoading, setDeleteLoading] = useState(false);
+    const { awakeToaster } = useToaster();
     const router = useRouter();
     const { supabase, session } = useSupabase();
 
@@ -36,6 +39,7 @@ export default function PostOptions({ post_id }: any) {
 
         router.replace('/')
         router.refresh();
+        awakeToaster(<DeleteToast />)
         setOpen(false);
         setDeleteLoading(false);
     }
