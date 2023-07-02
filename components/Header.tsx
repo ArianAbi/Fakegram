@@ -86,7 +86,7 @@ export const Header = () => {
 
                 {session?.user &&
                     <button
-                        className="text-right"
+                        className="text-right pl-4 border-l-[1px] border-stone-600"
                         onClick={toggleDialog}
                     >
                         logout
