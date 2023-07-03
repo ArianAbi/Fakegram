@@ -91,7 +91,9 @@ export const Header = () => {
                     {/* loging button */}
                     {!session?.user &&
                         <div className="text-right pl-4 border-l-[1px] border-stone-600">
-                            <a href={loginRoute}>Login</a>
+                            <Link href='/login'>
+                                Login
+                            </Link>
                         </div>
                     }
 
