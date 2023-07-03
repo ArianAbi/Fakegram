@@ -146,6 +146,72 @@ body {
   right: 1rem;
 }
 
+.toaster.warning {
+  animation: border-warning 2.5s ease-in-out forwards;
+}
+
+.toaster.danger {
+  animation: border-danger 2.5s ease-in-out forwards;
+}
+
+.toaster.successful {
+  animation: border-successful 2.5s ease-in-out forwards;
+}
+
+@keyframes border-warning {
+  0% {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  40% {
+    border-color: yellow;
+  }
+
+  60% {
+    border-color: yellow;
+  }
+
+  100% {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+@keyframes border-successful {
+  0% {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  40% {
+    border-color: green;
+  }
+
+  60% {
+    border-color: green;
+  }
+
+  100% {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+@keyframes border-danger {
+  0% {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  40% {
+    border-color: rgb(217, 94, 94);
+  }
+
+  60% {
+    border-color: rgb(217, 94, 94);
+  }
+
+  100% {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
 .loader-spiner {
   @apply absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[24px] h-[24px] border-l-2 border-t-2 border-white rounded-full;
   animation: loader-spiner 0.5s infinite linear;
