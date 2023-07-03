@@ -38,3 +38,11 @@ export function CreatedToast() {
         </div>
     )
 }
+
+export function FeatureNotAvailableToast() {
+    return (
+        <div className="flex gap-2 w-full justify-center">
+            this feature is not available yet !
+        </div>
+    )
+}
