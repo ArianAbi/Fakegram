@@ -39,7 +39,7 @@ export default function PostOptions({ post_id }: any) {
 
         router.replace('/')
         router.refresh();
-        awakeToaster(<DeleteToast />)
+        awakeToaster(<DeleteToast />, 'successful')
         setOpen(false);
         setDeleteLoading(false);
     }
