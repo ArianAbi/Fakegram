@@ -51,7 +51,7 @@ export default function Login() {
                     {/* google */}
                     <button
                         className="relative w-full bg-white py-2 rounded-md outline outline-1 outline-gray-400"
-                        onClick={() => awakeToaster(<FeatureNotAvailableToast />)}
+                        onClick={() => awakeToaster(<FeatureNotAvailableToast />, 'warning')}
                         type="button"
                     >
                         <Image
