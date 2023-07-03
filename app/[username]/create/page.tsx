@@ -93,7 +93,7 @@ function CreatePost({ params: { username } }: any) {
         }
 
         setLoadingMessage('redirecting...')
-        awakeToaster(<CreatedToast />)
+        awakeToaster(<CreatedToast />, 'successful')
         router.replace('/')
         router.refresh()
     }
