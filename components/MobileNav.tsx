@@ -13,7 +13,7 @@ const MobileNav = async () => {
 
     return (
         <>
-            <div className="fixed bottom-0 left-0 w-full text-center h-[70px] bg-black bg-opacity-80 backdrop-blur-lg text-white font-semibold
+            <div className="lg:hidden fixed bottom-0 left-0 w-full text-center h-[70px] bg-black bg-opacity-80 backdrop-blur-lg text-white font-semibold
             grid grid-cols-3 divide-x-2 py-4 divide-white divide-opacity-50 z-50 
             border-t-[1px] border-white border-opacity-40">
 

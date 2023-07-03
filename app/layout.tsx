@@ -26,10 +26,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <ToasterProvider>
             <Header />
             {children}
+
             <MobileNav />
 
             {/* adds padding to bottom for MobileNav */}
-            <div className='w-full h-[70px] bg-black'></div>
+            <div className='lg:hidden w-full h-[70px] bg-black'></div>
 
             <Toaster />
           </ToasterProvider>
