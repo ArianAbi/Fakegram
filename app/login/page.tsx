@@ -5,10 +5,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { useToaster } from "@/components/hooks/useToaster";
+import { FeatureNotAvailableToast } from "@/components/ToastComponents";
 
 export default function Login() {
 
     const { supabase, session } = useSupabase();
+    const { awakeToaster } = useToaster();
     const router = useRouter();
 
     const [email, setEmail] = useState("");
@@ -48,6 +51,8 @@ export default function Login() {
                     {/* google */}
                     <button
                         className="relative w-full bg-white py-2 rounded-md outline outline-1 outline-gray-400"
+                        onClick={() => awakeToaster(<FeatureNotAvailableToast />)}
+                        type="button"
                     >
                         <Image
                             className="absolute left-2 top-[50%] translate-y-[-50%]"
