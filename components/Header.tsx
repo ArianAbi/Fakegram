@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useSupabase } from "@/app/supabase-provider"
 import { usePathname, useRouter } from "next/navigation"
 import { revalidatePath } from "next/cache"
+import { useMediaQuery } from "./hooks/useMediaQuery"
 
 export const Header = () => {
 
@@ -15,6 +16,7 @@ export const Header = () => {
     const router = useRouter()
 
     const { supabase, session } = useSupabase()
+    const isMd = useMediaQuery('(min-width: 768px)');
 
     const [loggingOut, setLoggingOut] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -29,6 +31,7 @@ export const Header = () => {
     useEffect(() => {
 
         const handleScroll = () => {
+
             const currentScrollPos: number = window.scrollY;
 
             //threshold is the height of the header
@@ -37,8 +40,15 @@ export const Header = () => {
             const visible: boolean = prevScrollPos > currentScrollPos || currentScrollPos < threshold;
 
             setPrevScrollPos(currentScrollPos);
-            setHeaderVisible(visible);
+
+            //disable the header hidding if we are in desktop mode
+            if (!isMd) {
+                setHeaderVisible(visible);
+            } else {
+                setHeaderVisible(true)
+            }
         };
+
         window.addEventListener('scroll', handleScroll);
 
     }, [prevScrollPos]);
@@ -71,7 +81,8 @@ export const Header = () => {
             {/* adds the header space back to DOM */}
             <div className={`w-full h-[55px]`}></div>
 
-            <header className={`fixed flex items-center w-full h-[55px] text-white bg-black bg-opacity-80 backdrop-blur-xl border-b-[1px] border-stone-500 justify-between text-center p-3 z-40 transition-all duration-150 ${isHeaderVisible ? 'top-0' : '-top-16'}`} >
+            <header className={`fixed flex items-center w-full h-[55px] text-white bg-black bg-opacity-80 backdrop-blur-xl border-b-[1px] border-stone-500 justify-between text-center p-3 md:px-8 z-40 transition-all duration-150 
+            ${isHeaderVisible ? 'top-0' : '-top-16'}`} >
                 <div className="text-xl font-bold text-left">
                     <Link href="/">
                         Logo
