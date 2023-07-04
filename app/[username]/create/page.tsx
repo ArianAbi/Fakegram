@@ -9,6 +9,7 @@ import { v4 } from 'uuid'
 import { useRouter } from "next/navigation";
 import { useToaster } from "@/components/hooks/useToaster";
 import { CreatedToast } from "@/components/ToastComponents";
+import Link from "next/link";
 
 function CreatePost({ params: { username } }: any) {
 
@@ -97,11 +98,20 @@ function CreatePost({ params: { username } }: any) {
 
     return (
         <>
-            <div className="h-full w-full flex flex-col justify-center absolute px-12">
+            <div className="h-full w-full flex flex-col items-center justify-center absolute px-12">
+
+                {/* home button for large screens */}
+                <Link
+                    className="absolute top-6 left-6"
+                    href="/">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M 1 5 L 5 1 L 9 5 V 9 H 6 V 6 H 4 V 9 H 1 Z" stroke="white" fill="transparent" />
+                    </svg>
+                </Link>
 
                 <form
                     onSubmit={onFormSubmit}
-                    className="flex flex-col w-full items-center gap-6 rounded-md shadow-md"
+                    className="flex flex-col w-full items-center gap-6 rounded-md shadow-md max-w-[500px]"
                 >
                     <h2 className="text-2xl font-semibold">
                         Create New Post
@@ -112,7 +122,7 @@ function CreatePost({ params: { username } }: any) {
                     {/* image input */}
                     <div className="flex items-center justify-center w-full relative rounded-lg overflow-hidden">
                         <label htmlFor="dropzone-file"
-                            className={`flex flex-col items-center justify-center w-full h-64 border-2 border-gray-500 border-dashed rounded-lg cursor-pointer z-10
+                            className={`flex flex-col items-center justify-center w-full h-64 lg:h-[20rem] border-2 border-gray-500 border-dashed rounded-lg cursor-pointer z-10
                         bg-slate-950
                         ${fileSrc ? 'bg-opacity-50' : 'bg-opacity-0'}
                         hover:bg-opacity-50
