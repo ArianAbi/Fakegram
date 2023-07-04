@@ -2,12 +2,19 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
+import copy from 'copy-to-clipboard'
 import { useSupabase } from "@/app/supabase-provider"
 import { useRouter } from "next/navigation"
 import { useToaster } from "./hooks/useToaster"
 import { DeleteToast } from "./ToastComponents"
+import { CopyURLToast } from "./ToastComponents"
 
-export default function PostOptions({ post_id }: any) {
+interface PostOptions {
+    post_id: string,
+    username: string
+}
+
+export default function PostOptions({ post_id, username }: PostOptions) {
 
     const [open, setOpen] = useState(false)
     const [deletable, setDeletable] = useState(false);
@@ -15,6 +22,8 @@ export default function PostOptions({ post_id }: any) {
     const { awakeToaster } = useToaster();
     const router = useRouter();
     const { supabase, session } = useSupabase();
+
+    const publicUrl = 'https://fakegram-mu.vercel.app/'
 
     useEffect(() => {
         if (session?.user) {
@@ -51,8 +60,6 @@ export default function PostOptions({ post_id }: any) {
                 <button
                     className="text-xl"
                     onClick={() => {
-                        console.log('Toggle Dialog');
-
                         setOpen(!open)
                     }}
                 >
@@ -69,7 +76,8 @@ export default function PostOptions({ post_id }: any) {
                         whileTap={{ scale: 0.9 }}
                         className="flex items-center justify-between bg-transparent h-[40px] w-full"
                         onClick={() => {
-                            console.log('copy post url');
+                            copy(`${publicUrl}/${username}/${post_id}`)
+                            awakeToaster(<CopyURLToast />, 'successful')
                         }}
 
 

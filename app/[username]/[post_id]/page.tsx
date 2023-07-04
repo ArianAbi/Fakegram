@@ -66,7 +66,7 @@ export default async function Post({ params: { post_id } }: any) {
                         <h2>{username}</h2>
                     </Link>
 
-                    <PostOptions />
+                    <PostOptions post_id={post_id} username={username} />
                 </div>
 
                 <div className="bg-stone-500 w-full relative rounded-md overflow-hidden">
