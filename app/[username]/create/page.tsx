@@ -1,15 +1,12 @@
 'use client'
 
 import { useSupabase } from "@/app/supabase-provider";
-import { Input } from "@/components/ui/input";
 import { imgToBase64, compressImg } from "@/components/hooks/useOptimizeImage";
 import Image from "next/image";
 import { FormEvent, useEffect, useState } from "react";
 import { motion } from 'framer-motion'
 import { v4 } from 'uuid'
-import { Link } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
 import { useToaster } from "@/components/hooks/useToaster";
 import { CreatedToast } from "@/components/ToastComponents";
 
@@ -131,7 +128,7 @@ function CreatePost({ params: { username } }: any) {
                                 <p className="text-xs text-gray-200">PNG, JPG</p>
                             </div>
 
-                            <Input
+                            <input
                                 className="hidden"
                                 type="file"
                                 accept=".png , .jpg"
