@@ -38,3 +38,11 @@ export function FeatureNotAvailableToast() {
         </div>
     )
 }
+
+export function CopyURLToast() {
+    return (
+        <div className="flex gap-2 w-full justify-center">
+            post URL been copyed to clipboard
+        </div>
+    )
+}
