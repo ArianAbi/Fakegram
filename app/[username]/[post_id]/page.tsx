@@ -33,7 +33,7 @@ export default async function Post({ params: { post_id } }: any) {
     return (
         <>
             <article
-                className="relative flex flex-grow justify-start flex-col items-center overflow-hidden shadow-inset"
+                className="relative flex flex-grow justify-start flex-col items-center overflow-hidden shadow-inset max-w-[468px] mx-auto"
                 role="presentation"
                 tabIndex={-1}
             >
