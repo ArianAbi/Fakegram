@@ -67,7 +67,7 @@ export default async function userPage({ params: { username } }: any) {
 
 
             {/* Post `with the count on smaller screens` */}
-            <div className="w-full border-t-[1px] border-stone-600 text-center text-base py-4 md:text-lg">
+            <div className="w-full border-t-[1px] border-stone-600 text-center text-sm py-4 md:text-base">
                 <span className="md:hidden">{posts?.length}</span> Posts
             </div>
 
