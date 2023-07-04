@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import copy from 'copy-to-clipboard'
 import { useSupabase } from "@/app/supabase-provider"
@@ -22,9 +22,26 @@ export default function PostOptions({ post_id, username }: PostOptions) {
     const { awakeToaster } = useToaster();
     const router = useRouter();
     const { supabase, session } = useSupabase();
+    const optionsRef = useRef<HTMLDivElement | null>(null)
 
     const publicUrl = 'https://fakegram-mu.vercel.app/'
 
+    const handleClick = (event: MouseEvent) => {
+        if (open && optionsRef.current && !optionsRef.current.contains(event.target as Node)) {
+            setOpen(false)
+        }
+    };
+
+    //check if a click is outside of options boundris
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClick)
+
+        return () => {
+            document.removeEventListener('mousedown', handleClick)
+        }
+    }, [])
+
+    //check if user is allowed to delete
     useEffect(() => {
         if (session?.user) {
             setDeletable(true)
@@ -70,6 +87,7 @@ export default function PostOptions({ post_id, username }: PostOptions) {
                 </button>
 
                 <div
+                    ref={optionsRef}
                     className={`absolute text-sm flex flex-col items-center justify-center divide-y-[1px] right-4 top-4 w-[160px] py-2 px-4 bg-black bg-opacity-80 rounded-md border-[1px] border-white border-opacity-25 z-20
                 origin-top-right ${open ? 'scale-100' : 'scale-0'} transition-all duration-75`}>
                     <motion.button
