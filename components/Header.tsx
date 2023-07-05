@@ -7,6 +7,7 @@ import { useSupabase } from "@/app/supabase-provider"
 import { usePathname, useRouter } from "next/navigation"
 import { revalidatePath } from "next/cache"
 import { useMediaQuery } from "./hooks/useMediaQuery"
+import DialogBox from "./DialogBox"
 
 export const Header = () => {
 
@@ -79,10 +80,10 @@ export const Header = () => {
             setLoggingOut(true)
             await supabase.auth.signOut();
             console.log("logged out");
+            await revalidatePath('/')
+            await router.replace('/');
             setLoggingOut(false)
             setDialogOpen(false)
-            revalidatePath('/')
-            router.replace('/');
         } catch (err) {
             console.log(err);
             setLoggingOut(false)
@@ -177,38 +178,15 @@ export const Header = () => {
             </header>
 
             {dialogOpen &&
-                <>
-                    {/* backdrop */}
-                    <div
-                        className="absolute flex justify-center items-center bg-black bg-opacity-50 backdrop-blur-sm w-full h-full z-40"
-                        onClick={toggleDialog}
-                    >
-                        {/* dialogBox */}
-                        <div className="flex flex-col items-center justify-center gap-6 p-8 bg-slate-800 text-white rounded-md">
-                            <h2 className="text-lg font-semibold">
-                                Logout?
-                            </h2>
-
-                            <div className="flex gap-4 ">
-                                <button
-                                    className="w-[100px] text-white border-2 border-white py-2 rounded-md font-semibold"
-                                    onClick={toggleDialog}
-                                    disabled={loggingOut}
-                                >
-                                    cancel
-                                </button>
-
-                                <button
-                                    className="w-[100px] bg-red-500 text-white rounded-md font-semibold"
-                                    onClick={logout}
-                                    disabled={loggingOut}
-                                >
-                                    {loggingOut ? "logging out" : "logout"}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </>
+                <DialogBox
+                    title="Want to Logout ?"
+                    agree="logout"
+                    discard="Discard"
+                    onAgree={logout}
+                    onDiscard={toggleDialog}
+                    loadingState={loggingOut}
+                    loadingMessage="Logging Out..."
+                />
             }
         </>
     )
