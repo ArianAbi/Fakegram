@@ -56,3 +56,11 @@ export function CopyURLToast() {
         </div>
     )
 }
+
+export function SomethingWentWrongToast() {
+    return (
+        <div className="flex gap-2 w-full justify-center">
+            something went wrong , try again
+        </div>
+    )
+}
