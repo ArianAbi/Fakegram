@@ -3,10 +3,10 @@
 import { useSupabase } from "../supabase-provider";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import { Metadata } from "next";
 import Link from "next/link";
 import { useToaster } from "@/components/hooks/useToaster";
-import { FeatureNotAvailableToast } from "@/components/ToastComponents";
+import { FeatureNotAvailableToast, LoginWelcomeToast, SomethingWentWrongToast } from "@/components/ToastComponents";
 
 export default function Login() {
 
@@ -20,10 +20,34 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
+    const loginAsGuest = async () => {
+        setLoading(true)
+
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: process.env.NEXT_PUBLIC_GUEST_EMAIL!,
+            password: process.env.NEXT_PUBLIC_GUEST_PASSWORD!
+        })
+
+        if (error) {
+            awakeToaster(<SomethingWentWrongToast />, 'danger')
+            setLoading(false)
+            return;
+        }
+
+        awakeToaster(<LoginWelcomeToast username="Fakegram Guest" />)
+        router.replace('/');
+    }
+
     const onFormSubmit = async (e: any) => {
         e.preventDefault()
         setLoading(true)
         setError("");
+
+        if (!email || !password) {
+            setError('please fill the fields')
+            setLoading(false)
+            return;
+        }
 
         const { data, error } = await supabase.auth.signInWithPassword({
             email: email,
@@ -46,49 +70,63 @@ export default function Login() {
 
                 <form
                     onSubmit={onFormSubmit}
-                    className="shadow-md rounded-md w-full bg-white p-5 flex flex-col gap-6"
+                    className={`w-full p-5 flex flex-col gap-6 text-white max-w-[468px] ${loading ? 'animate-pulse' : ''}`}
                 >
-                    {/* google */}
+                    {/* Login as a guest */}
                     <button
-                        className="relative w-full bg-white py-2 rounded-md outline outline-1 outline-gray-400"
-                        onClick={() => awakeToaster(<FeatureNotAvailableToast />, 'warning')}
+                        className="relative w-full py-2 rounded-md bg-stone-100 text-black font-semibold"
+                        onClick={() => loginAsGuest()}
                         type="button"
+                        disabled={loading}
                     >
-                        <Image
-                            className="absolute left-2 top-[50%] translate-y-[-50%]"
-                            priority
-                            src="/google.png"
-                            height={28}
-                            width={28}
-                            alt="login with google"
-                        />
-                        Login With Google
+                        {/* guest svg */}
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="black" viewBox="0 0 24 24" strokeWidth={0} stroke="currentColor" className="w-6 h-6 absolute left-2 top-[50%] translate-y-[-50%]">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                        </svg>
+
+                        Login As a Guest
                     </button>
 
 
                     {/* divider */}
                     <div className="relative text-center">
-                        <div className="w-full h-[1px] bg-black opacity-50"></div>
-                        <span className="absolute top-0 translate-x-[-50%] translate-y-[-50%] bg-white px-2 font-semibold">or</span>
+                        <div className="w-full h-[1px] bg-white opacity-50"></div>
+                        <span className="absolute top-0 translate-x-[-50%] translate-y-[-50%] bg-black px-2 font-semibold">or</span>
                     </div>
 
                     {/* email */}
-                    <input
-                        className="py-2 px-3 rounded-md outline outline-1 outline-gray-400"
-                        type="text"
-                        placeholder="email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
+                    <div className="relative">
+                        <input
+                            className="w-full py-2 pl-8 pr-3 transition-colors bg-transparent border-b-[1px] border-stone-600 focus-within:outline-none focus-within:border-white focus-within:border-b-2"
+                            type="text"
+                            placeholder="Email"
+                            value={email}
+                            disabled={loading}
+                            onChange={e => setEmail(e.target.value)}
+                        />
+                        {/* email svg */}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth={1} stroke="white" className="w-6 h-6 absolute left-0 top-[50%] translate-y-[-50%] stroke-stone-200">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
 
                     {/* password */}
-                    <input
-                        className="py-2 px-3 rounded-md outline outline-1 outline-gray-400"
-                        type="password"
-                        placeholder="password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
+                    <div className="relative">
+                        <input
+                            className="w-full py-2 pl-8 pr-3 transition-colors bg-transparent border-b-[1px] border-stone-600 focus-within:outline-none focus-within:border-white focus-within:border-b-2"
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            disabled={loading}
+                            onChange={e => setPassword(e.target.value)}
+                        />
+                        {/* lock svg */}
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="white" className="w-6 h-6 absolute left-0 top-[50%] translate-y-[-50%] stroke-stone-200">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                        </svg>
+                    </div>
+
 
                     {/* login */}
                     <div className="text-center">
@@ -102,19 +140,28 @@ export default function Login() {
                             {loading ? "loading..." : "Login"}
                         </button>
 
-                        {error && <span className="text-sm italic text-red-600">{error}</span>}
+                        {error && <span className="text-sm italic text-red-500">{error}</span>}
                     </div>
 
-                    {/* signup */}
-                    <span className="w-full text-center gap-2 text-sm">
-                        don&apos;t have an account ?
-                        <Link
-                            className="text-cyan-600"
-                            href="/signup"
-                        >
-                            SignUp
-                        </Link>
-                    </span>
+                    <div className="flex flex-col items-center justify-center gap-4">
+                        {/* signup */}
+                        <span className="w-full text-center flex items-center justify-center gap-1 text-sm">
+                            don&apos;t have an account ?
+                            <Link
+                                className="text-cyan-600"
+                                href="/signup"
+                            >
+                                SignUp
+                            </Link>
+                        </span>
+
+                        {/* guest login message */}
+                        <span className="w-full text-center text-stone-500 text-sm">
+                            or click on <span className="italic text-[0.9rem] text-stone-300">Login As a Guest</span> button to login with
+                            premade account
+                        </span>
+                    </div>
+
                 </form>
             </div>
         </>
