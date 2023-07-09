@@ -5,9 +5,10 @@ import SupabaseProvider from './supabase-provider'
 import MobileNav from '@/components/MobileNav'
 import { Header } from '@/components/Header'
 import { Toaster, ToasterProvider } from '@/components/hooks/useToaster'
+import { Metadata } from 'next'
 
-export const metadata = {
-  title: 'Fakegram',
+export const metadata: Metadata = {
+  title: "Fakegram Home",
   description: 'instagram clone',
 }
 
