@@ -102,9 +102,9 @@ function CreatePost({ params: { username } }: any) {
 
                 {/* home button for large screens */}
                 <Link
-                    className="absolute top-6 left-6"
+                    className="absolute top-6 left-6 hidden lg:block"
                     href="/">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M 1 5 L 5 1 L 9 5 V 9 H 6 V 6 H 4 V 9 H 1 Z" stroke="white" fill="transparent" />
                     </svg>
                 </Link>
