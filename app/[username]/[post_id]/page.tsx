@@ -19,8 +19,8 @@ export default async function Post({ params: { post_id } }: any) {
     if (postError) {
         throw new Error(postError.message)
     }
-
-    const { data: _username, error: _usernameErr } = await supabase.from('users').select('user_name').eq('user_id', post[0].creator_id)
+    const creator_id = post[0].creator_id;
+    const { data: _username, error: _usernameErr } = await supabase.from('users').select('user_name').eq('user_id', creator_id)
     const { data: _imageUrl } = await supabase.storage.from('posts').getPublicUrl(post[0].image_path)
     const { data: _likes, error: _likesErr } = await supabase.from('likes').select('id').eq('post_id', post[0].id)
 
@@ -66,7 +66,7 @@ export default async function Post({ params: { post_id } }: any) {
                         <h2>{username}</h2>
                     </Link>
 
-                    <PostOptions post_id={post_id} username={username} />
+                    <PostOptions post_id={post_id} username={username} creator_id={creator_id} />
                 </div>
 
                 <div className="bg-stone-500 w-full relative rounded-md overflow-hidden">

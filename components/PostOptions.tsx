@@ -11,10 +11,11 @@ import { CopyURLToast } from "./ToastComponents"
 
 interface PostOptions {
     post_id: string,
+    creator_id: string,
     username: string
 }
 
-export default function PostOptions({ post_id, username }: PostOptions) {
+export default function PostOptions({ post_id, creator_id, username }: PostOptions) {
 
     const [open, setOpen] = useState(false)
     const [deletable, setDeletable] = useState(false);
@@ -43,7 +44,7 @@ export default function PostOptions({ post_id, username }: PostOptions) {
 
     //check if user is allowed to delete
     useEffect(() => {
-        if (session?.user) {
+        if (session?.user && session.user.id === creator_id) {
             setDeletable(true)
         } else {
             setDeletable(false)
