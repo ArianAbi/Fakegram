@@ -226,3 +226,17 @@ body {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
+.skeleton{
+  background: #888;
+  animation: skeleton 1s alternate-reverse infinite;
+}
+
+@keyframes skeleton{
+  0%{
+    background: #888;
+  }
+  100%{
+    background: #b5b5b5;
+  }
+}
