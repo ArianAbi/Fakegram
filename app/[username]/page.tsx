@@ -22,7 +22,7 @@ export default async function userPage({ params: { username } }: any) {
                 <div className="md:col-span-1 md:justify-self-end md:pr-8">
                     {/* mobile profile image */}
                     <Image
-                        className="md:hidden rounded-full inline"
+                        className="md:hidden rounded-full inline border-2 border-stone-300"
                         src={'/defaultProfile.png'}
                         width={70}
                         height={70}
@@ -32,7 +32,7 @@ export default async function userPage({ params: { username } }: any) {
 
                     {/* desktop profile image */}
                     <Image
-                        className="hidden md:inline rounded-full"
+                        className="hidden md:inline rounded-full border-2 border-stone-300"
                         src="/defaultProfile.png"
                         width={130}
                         height={130}

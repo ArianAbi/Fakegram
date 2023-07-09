@@ -54,7 +54,7 @@ const Post = async ({ id, creator_id, description, date, image_path, image_thumb
                     className="flex gap-2 items-center text-xl font-semibold"
                 >
                     <Image
-                        className="rounded-full"
+                        className="rounded-full border-2 border-stone-300"
                         alt="profile"
                         src={'/defaultProfile.png'}
                         height={40}
