@@ -65,10 +65,10 @@ export function SomethingWentWrongToast() {
     )
 }
 
-export function LoginWelcomeToast(username: string) {
+export function LoginWelcomeToast({ username }: { username: string }) {
     return (
         <div className="flex gap-2 w-full justify-center">
-            welcome {username}
+            welcome <span className="italic font-semibold">{username}</span>
         </div>
     )
 }
