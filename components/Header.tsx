@@ -80,13 +80,12 @@ export const Header = () => {
             setLoggingOut(true)
             await supabase.auth.signOut();
             console.log("logged out");
-            await revalidatePath('/')
-            await router.replace('/');
-            setLoggingOut(false)
-            setDialogOpen(false)
         } catch (err) {
             console.log(err);
             setLoggingOut(false)
+            setDialogOpen(false)
+        } finally {
+            router.refresh()
             setDialogOpen(false)
         }
     }
