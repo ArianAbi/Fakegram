@@ -5,7 +5,6 @@ import Link from "next/link"
 import { motion } from 'framer-motion'
 import { useSupabase } from "@/app/supabase-provider"
 import { usePathname, useRouter } from "next/navigation"
-import { revalidatePath } from "next/cache"
 import { useMediaQuery } from "./hooks/useMediaQuery"
 import DialogBox from "./DialogBox"
 
@@ -104,9 +103,13 @@ export const Header = () => {
 
             <header className={`fixed flex items-center w-full h-[55px] text-white bg-black bg-opacity-80 backdrop-blur-xl border-b-[1px] border-stone-500 justify-between text-center p-3 md:px-8 z-40 transition-all duration-150 
             ${isHeaderVisible ? 'top-0' : '-top-16'}`} >
-                <div className="text-xl font-bold text-left">
+                <div className="relative h-full w-full">
                     <Link href="/">
-                        Logo
+                        <img
+                            className="h-full"
+                            src="/FakegramText.png"
+                            alt="header logo"
+                        />
                     </Link>
                 </div>
 
