@@ -55,14 +55,20 @@ export default async function userPage({ params: { username } }: any) {
 
                     {/* bio for large screens */}
                     <p className="hidden md:block text-sm">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta alias aliquam asperiores corporis placeat iste autem numquam reiciendis inventore temporibus?
+                        {username === "Fakegram" ?
+                            "this is a premade account for visitors to login easily and use all of the features"
+                            :
+                            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta alias aliquam asperiores corporis placeat iste autem numquam reiciendis inventore temporibus?"}
                     </p>
                 </div>
             </div>
 
             {/* bio for smaller screens */}
             <p className="md:hidden text-sm px-4 mt-4 mb-8">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta alias aliquam asperiores corporis placeat iste autem numquam reiciendis inventore temporibus?
+                {username === "Fakegram" ?
+                    "this is a premade account for visitors to login easily and use all of the features"
+                    :
+                    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta alias aliquam asperiores corporis placeat iste autem numquam reiciendis inventore temporibus?"}
             </p>
 
 
