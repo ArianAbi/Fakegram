@@ -12,12 +12,12 @@ export default function Error({
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center">
-                <h2 className="text-2xl mt-8">Something Went Wrong {':('}</h2>
-                <span className="italic mt-4">{error.message}</span>
+            <div className="flex flex-col items-center justify-center m-auto">
+                <h2 className="text-2xl mt-8 italic">Something Went Wrong {':('}</h2>
+                <span className="italic mt-4 font-semibold text-stone-400">{error.message}</span>
 
                 <button
-                    className="mt-4 bg-red-500"
+                    className="mt-4 py-2 px-6 rounded-md border-2 border-white"
                     onClick={() => reset()}
                 >
                     Try Again
