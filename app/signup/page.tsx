@@ -105,13 +105,13 @@ export default function Signup() {
             <div className="w-full h-full text-white flex flex-col items-center justify-center px-10 absolute">
 
                 <form
-                    className="shadow-md rounded-md w-full p-5 flex flex-col gap-4 text-center"
+                    className="shadow-md rounded-md w-full max-w-[468px] mx-auto p-5 flex flex-col gap-4 text-center"
                     onSubmit={onFormSubmit}
                 >
                     <h1
                         className="text-lg font-semibold my-3"
                     >
-                        Create Fakegram Account
+                        Create a Fakegram Account
                     </h1>
 
                     {/* username */}
