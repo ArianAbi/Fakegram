@@ -89,7 +89,7 @@ export default function PostOptions({ post_id, creator_id, username }: PostOptio
 
                 <div
                     ref={optionsRef}
-                    className={`absolute text-sm flex flex-col items-center justify-center divide-y-[1px] right-4 top-4 w-[160px] py-2 px-4 bg-black bg-opacity-80 rounded-md border-[1px] border-white border-opacity-25 z-20
+                    className={`absolute text-sm flex flex-col items-center justify-center divide-y-[1px] right-4 top-4 w-[160px] py-2 px-4 bg-black bg-opacity-50 rounded-md border-[1px] border-white border-opacity-25 z-20 backdrop-blur-lg
                 origin-top-right ${open ? 'scale-100' : 'scale-0'} transition-all duration-75`}>
                     <motion.button
                         whileTap={{ scale: 0.9 }}
