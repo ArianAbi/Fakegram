@@ -42,12 +42,12 @@ const Post = async ({ id, creator_id, description, date, image_path, image_thumb
                 src={_imageUrl.publicUrl}
                 fill
                 loading="lazy"
-                style={{ objectFit: "cover", filter: "blur(30px)", transform: 'scale(1.4)', opacity: '20%', zIndex: '-1' }}
+                style={{ objectFit: "cover", filter: "blur(30px)", transform: 'scale(1.4)', opacity: '25%', zIndex: '-1' }}
             />
 
             {/* Profile */}
             <div
-                className="w-full p-4 flex justify-between items-center bg-black"
+                className="w-full p-4 flex justify-between items-center bg-black bg-opacity-60"
             >
                 <Link
                     href={`/${username}`}
