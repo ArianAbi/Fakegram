@@ -113,8 +113,8 @@ function CreatePost({ params: { username } }: any) {
                     onSubmit={onFormSubmit}
                     className="flex flex-col w-full items-center gap-6 rounded-md shadow-md max-w-[500px]"
                 >
-                    <h2 className="text-2xl font-semibold">
-                        Create New Post
+                    <h2 className="text-xl sm:text-2xl font-semibold">
+                        Create a Post for {username}
                     </h2>
 
                     <hr className="border-white border-[1px] w-[90%]" />
