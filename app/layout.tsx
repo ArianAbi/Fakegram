@@ -8,6 +8,7 @@ import { Toaster, ToasterProvider } from '@/components/hooks/useToaster'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  manifest: '/manifest.json',
   title: "Fakegram Home",
   description: 'instagram clone',
 }
