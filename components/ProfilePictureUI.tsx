@@ -22,7 +22,7 @@ export default function ProfilePictureUI({
   if (profilePictureUrl === null) {
     return (
       <Image
-        className="w-full h-full rounded-full"
+        className="w-full h-full rounded-full aspect-square"
         src={"/defaultProfile.png"}
         alt="default profile picture"
         width={100}
@@ -33,7 +33,7 @@ export default function ProfilePictureUI({
 
   return (
     <Image
-      className="w-full h-full rounded-full"
+      className="w-full h-full rounded-full aspect-square"
       src={profilePictureUrl}
       alt="profile picture"
       width={100}

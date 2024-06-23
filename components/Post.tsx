@@ -96,7 +96,7 @@ const Post = async ({
           className="flex gap-2 items-center text-xl font-semibold"
         >
           <Image
-            className="rounded-full border-[1px] border-stone-300"
+            className="rounded-full border-[1px] border-stone-300 aspect-square"
             alt="profile"
             src={`${
               profilePublicUrl ? profilePublicUrl : "/defaultProfile.png"

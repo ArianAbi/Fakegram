@@ -66,7 +66,7 @@ export default async function userPage({ params: { username } }: any) {
         <div className="md:col-span-1 md:justify-self-end md:pr-8">
           {/* mobile profile image */}
           <Image
-            className="md:hidden rounded-full inline border-2 border-stone-300"
+            className="md:hidden rounded-full inline border-2 border-stone-300 aspect-square"
             src={`${
               profilePublicUrl ? profilePublicUrl : "/defaultProfile.png"
             }`}
@@ -78,7 +78,7 @@ export default async function userPage({ params: { username } }: any) {
 
           {/* desktop profile image */}
           <Image
-            className="hidden md:inline rounded-full border-2 border-stone-300"
+            className="hidden md:inline rounded-full border-2 border-stone-300 aspect-square"
             src={`${
               profilePublicUrl ? profilePublicUrl : "/defaultProfile.png"
             }`}

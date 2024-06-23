@@ -93,7 +93,7 @@ export default async function Post({ params: { post_id } }: any) {
             className="flex gap-2 items-center text-xl font-semibold"
           >
             <Image
-              className="rounded-full"
+              className="rounded-full aspect-square"
               alt="profile"
               src={`${
                 profilePublicUrl ? profilePublicUrl : "/defaultProfile.png"
