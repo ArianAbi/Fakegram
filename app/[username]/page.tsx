@@ -23,17 +23,22 @@ export default async function userPage({ params: { username } }: any) {
     const { data: _user_data } = await supabase
       .from("users")
       .select("*")
-      .eq("user_id", user_id);
+      .eq("user_id", creator_id);
 
     if (!_user_data) return;
 
+    //if the user has no profile photo return null
+    if (_user_data[0].user_profile_picture_url === null) {
+      return null;
+    }
+
+    //else get the public url
     const { data: _imageUrl } = await supabase.storage
       .from("profile_picture")
       .getPublicUrl(_user_data[0].user_profile_picture_url);
 
     return _imageUrl.publicUrl;
   }
-
   const profilePublicUrl = await getProfilePublicUrl();
 
   return (
