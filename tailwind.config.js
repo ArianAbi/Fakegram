@@ -2,9 +2,9 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
   ],
   theme: {
     container: {
@@ -50,6 +50,12 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      backgroundColor: {
+        platform: "rgb(12 13 14)",
+      },
+      borderColor: {
+        platform: "#262931",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -68,9 +74,9 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        'pulse-fast': 'pulse 2s linear infinite',
+        "pulse-fast": "pulse 2s linear infinite",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
