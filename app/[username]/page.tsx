@@ -19,6 +19,22 @@ export default async function userPage({ params: { username } }: any) {
     .select("*")
     .eq("creator_id", user_id);
 
+  const { data: _user_data } = await supabase
+    .from("users")
+    .select("*")
+    .eq("user_id", user_id);
+
+  async function getBio() {
+    const { data: _user_data } = await supabase
+      .from("users")
+      .select("*")
+      .eq("user_id", user_id);
+
+    if (!_user_data) return;
+
+    return _user_data[0].user_bio;
+  }
+
   async function getProfilePublicUrl() {
     const { data: _user_data } = await supabase
       .from("users")
@@ -40,6 +56,7 @@ export default async function userPage({ params: { username } }: any) {
     return _imageUrl.publicUrl;
   }
   const profilePublicUrl = await getProfilePublicUrl();
+  const bio = await getBio();
 
   return (
     <section className="max-w-[924px] w-full mx-auto pt-4">
@@ -80,30 +97,17 @@ export default async function userPage({ params: { username } }: any) {
             <ProfileButtons username={username} />
           </div>
 
-          {/* post count for large screens */}
-          <span className="hidden md:inline w-full text-base">
-            {posts?.length} posts
-          </span>
-
           {/* bio for large screens */}
-          <p className="hidden md:block text-sm">
-            {username === "Fakegram"
-              ? "this is a premade account for visitors to login easily and use all of the features"
-              : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta alias aliquam asperiores corporis placeat iste autem numquam reiciendis inventore temporibus?"}
-          </p>
+          <p className="hidden md:block text-base text-left w-full">{bio}</p>
         </div>
       </div>
 
       {/* bio for smaller screens */}
-      <p className="md:hidden text-sm px-4 mt-4 mb-8">
-        {username === "Fakegram"
-          ? "this is a premade account for visitors to login easily and use all of the features"
-          : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta alias aliquam asperiores corporis placeat iste autem numquam reiciendis inventore temporibus?"}
-      </p>
+      <p className="md:hidden text-base px-4 mt-4 mb-8">{bio}</p>
 
       {/* Post `with the count on smaller screens` */}
       <div className="w-full border-t-[1px] border-stone-600 text-center text-sm py-4 md:text-base">
-        <span className="md:hidden">{posts?.length}</span> Posts
+        {posts?.length} Posts
       </div>
 
       <div className="grid grid-cols-3 gap-1">
