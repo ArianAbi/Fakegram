@@ -3,6 +3,7 @@ import { headers, cookies } from "next/headers";
 import Image from "next/image";
 import ProfilePost from "./ProfilePost";
 import ProfileButtons from "./ProfileButtons";
+import ProfilePictureUI from "@/components/ProfilePictureUI";
 
 export default async function userPage({ params: { username } }: any) {
   const supabase = createServerComponentSupabaseClient({
@@ -18,6 +19,23 @@ export default async function userPage({ params: { username } }: any) {
     .select("*")
     .eq("creator_id", user_id);
 
+  async function getProfilePublicUrl() {
+    const { data: _user_data } = await supabase
+      .from("users")
+      .select("*")
+      .eq("user_id", user_id);
+
+    if (!_user_data) return;
+
+    const { data: _imageUrl } = await supabase.storage
+      .from("profile_picture")
+      .getPublicUrl(_user_data[0].user_profile_picture_url);
+
+    return _imageUrl.publicUrl;
+  }
+
+  const profilePublicUrl = await getProfilePublicUrl();
+
   return (
     <section className="max-w-[924px] w-full mx-auto pt-4">
       {/* profile */}
@@ -27,7 +45,9 @@ export default async function userPage({ params: { username } }: any) {
           {/* mobile profile image */}
           <Image
             className="md:hidden rounded-full inline border-2 border-stone-300"
-            src={"/defaultProfile.png"}
+            src={`${
+              profilePublicUrl ? profilePublicUrl : "/defaultProfile.png"
+            }`}
             width={70}
             height={70}
             priority
@@ -37,7 +57,9 @@ export default async function userPage({ params: { username } }: any) {
           {/* desktop profile image */}
           <Image
             className="hidden md:inline rounded-full border-2 border-stone-300"
-            src="/defaultProfile.png"
+            src={`${
+              profilePublicUrl ? profilePublicUrl : "/defaultProfile.png"
+            }`}
             width={130}
             height={130}
             priority
