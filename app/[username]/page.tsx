@@ -17,7 +17,8 @@ export default async function userPage({ params: { username } }: any) {
   const { data: posts } = await supabase
     .from("posts")
     .select("*")
-    .eq("creator_id", user_id);
+    .eq("creator_id", user_id)
+    .order("date", { ascending: false });
 
   const { data: _user_data } = await supabase
     .from("users")
