@@ -23,7 +23,7 @@ export default async function userPage({ params: { username } }: any) {
     const { data: _user_data } = await supabase
       .from("users")
       .select("*")
-      .eq("user_id", creator_id);
+      .eq("user_id", user_id);
 
     if (!_user_data) return;
 
