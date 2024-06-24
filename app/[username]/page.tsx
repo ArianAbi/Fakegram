@@ -91,7 +91,7 @@ export default async function userPage({ params: { username } }: any) {
         </div>
 
         {/* edit profile button */}
-        <div className="col-span-1 flex flex-col items-center justify-center gap-4 pl-4 md:pl-0">
+        <div className="col-span-2 flex flex-col items-center justify-center gap-4 pl-4 md:pl-0">
           <div className="flex flex-col md:flex-row justify-start w-full gap-3 md:gap-6">
             <h2>{username}</h2>
 
